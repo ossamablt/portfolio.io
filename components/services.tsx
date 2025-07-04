@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code, Server, Database, Smartphone, Cloud, FileText } from "lucide-react"
+import { Code, Database, Cloud, FileText } from "lucide-react"
 
 const services = [
   {

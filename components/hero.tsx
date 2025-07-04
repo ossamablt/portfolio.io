@@ -13,16 +13,6 @@ export default function Hero() {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
   }
 
-  const downloadCV = () => {
-    // Create a link element and trigger download
-    const link = document.createElement("a")
-    link.href = "/cv-abdelmadjid-belilet.pdf"
-    link.download = "CV-Abdelmadjid-Belilet.pdf"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center px-4">
       <ParticleBackground />
