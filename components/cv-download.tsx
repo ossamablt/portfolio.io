@@ -39,7 +39,9 @@ export default function CVDownload({ variant = "button", size = "default", class
         setDownloadStatus("success")
 
         // Track download event (you can integrate with analytics)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (typeof window !== "undefined" && (window as any).gtag) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(window as any).gtag("event", "cv_download", {
             event_category: "engagement",
             event_label: "CV Download",

@@ -46,7 +46,7 @@ export default function Navigation() {
               style={{ boxShadow: "0 2px 8px 0 rgba(34,139,230,0.10)" }}
             >
               <Image
-                src="/log.png"
+                src="/logoo.png"
                 alt="Logo"
                 width={40}
                 height={40}

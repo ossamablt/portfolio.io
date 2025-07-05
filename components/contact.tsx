@@ -42,7 +42,7 @@ export default function Contact() {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
       setIsSubmitted(true)
       setFormData({ name: '', email: '', subject: '', message: '' })
-    } catch (error) {
+    } catch {
       alert('There was an error sending your message. Please try again later.')
     }
     setIsSubmitting(false)
@@ -70,7 +70,7 @@ export default function Contact() {
             <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Touch</span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Ready to start your next project? Let's discuss how we can work together to bring your ideas to life.
+            Ready to start your next project? Let&apos;s discuss how we can work together to bring your ideas to life.
           </p>
         </motion.div>
 
@@ -84,10 +84,10 @@ export default function Contact() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">Let's Connect</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">Let&apos;s Connect</h3>
               <p className="text-slate-400 leading-relaxed mb-8">
-                I'm always interested in new opportunities and exciting projects. Whether you have a question, want to
-                discuss a project, or just want to say hello, I'd love to hear from you.
+                I&apos;m always interested in new opportunities and exciting projects. Whether you have a question, want to
+                discuss a project, or just want to say hello, I&apos;d love to hear from you.
               </p>
             </div>
 
@@ -164,7 +164,7 @@ export default function Contact() {
               >
                 <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                <p className="text-slate-400">Thank you for reaching out. I'll get back to you soon.</p>
+                <p className="text-slate-400">Thank you for reaching out. I&apos;ll get back to you soon.</p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -213,7 +213,7 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     className="bg-slate-700/50 border-slate-600 text-white placeholder-slate-400 focus:border-cyan-400"
-                    placeholder="What's this about?"
+                    placeholder="What&apos;s this about?"
                   />
                 </div>
 

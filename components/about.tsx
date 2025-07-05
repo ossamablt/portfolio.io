@@ -117,12 +117,12 @@ export default function About() {
                   I discovered my love for creating digital solutions.
                 </p>
                 <p>
-                  With over 5 years of experience in full-stack development, I've worked with startups and established
+                  With over 5 years of experience in full-stack development, I&apos;ve worked with startups and established
                   companies, helping them bring their ideas to life through clean, efficient code and modern
                   technologies.
                 </p>
                 <p>
-                  I believe in continuous learning and staying up-to-date with the latest technologies. When I'm not
+                  I believe in continuous learning and staying up-to-date with the latest technologies. When I&apos;m not
                   coding, you can find me exploring new frameworks, contributing to open-source projects, or sharing
                   knowledge with the developer community.
                 </p>

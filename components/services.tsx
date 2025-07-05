@@ -113,8 +113,8 @@ export default function Services() {
           <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50">
             <h3 className="text-2xl font-bold text-white mb-4">Ready to Start Your Project?</h3>
             <p className="text-slate-400 mb-6 max-w-2xl mx-auto">
-              Let's discuss how I can help bring your ideas to life with modern web technologies and best practices.
-              From concept to deployment, I'll guide you through every step.
+              Let&apos;s discuss how I can help bring your ideas to life with modern web technologies and best practices.
+              From concept to deployment, I&apos;ll guide you through every step.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
