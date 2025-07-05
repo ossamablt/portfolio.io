@@ -14,24 +14,45 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center px-4">
+    <section id="home" className="relative min-h-screen flex items-center justify-center px-4 pt-16 md:pt-24 lg:pt-28">
       <ParticleBackground />
       <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between z-10">
         {/* Left: Image */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex-shrink-0 mb-8 md:mb-0 md:mr-2 flex justify-center md:justify-start w-full md:w-1/2"
+          initial={{ opacity: 0, x: -50, scale: 0.8 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ 
+            duration: 1.2, 
+            type: "spring", 
+            stiffness: 100, 
+            damping: 15 
+          }}
+          whileHover={{ 
+            scale: 1.05, 
+            rotateY: 5,
+            transition: { duration: 0.3 }
+          }}
+          className="flex-shrink-0 mb-8 md:mb-0 md:mr-2 flex justify-center md:justify-start w-full md:w-1/2 md:mb-20"
         >
-          <Image
-            src="/3.jpg"
-            alt="Abdelmadjid Belilet photo"
-            width={800}
-            height={900}
-            className="rounded-2xl border-4 border-cyan-400 shadow-2xl object-cover object-top w-72 h-72 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem]"
-            priority
-          />
+          <motion.div
+            initial={{ boxShadow: "0 0 0 rgba(34, 211, 238, 0)" }}
+            whileInView={{ 
+              boxShadow: "0 0 30px rgba(34, 211, 238, 0.3)",
+              transition: { duration: 1, delay: 0.5 }
+            }}
+            viewport={{ once: true }}
+            className="rounded-2xl border-4 border-cyan-400 shadow-2xl overflow-hidden"
+          >
+            <Image
+              src="/3.jpg"
+              alt="Abdelmadjid Belilet photo"
+              width={600}
+              height={700}
+              className="object-cover object-top w-72 h-60 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem] transition-transform duration-300 hover:scale-110"
+              priority
+            />
+          </motion.div>
         </motion.div>
         {/* Right: Info */}
         <div className="w-full md:w-1/2 text-center md:text-left">
@@ -104,7 +125,7 @@ export default function Hero() {
             ))}
           </motion.div>
 
-          <div className="flex items-center justify-center md:justify-start gap-2 mt-4 text-cyan-400">
+          <div className="flex items-center justify-center md:justify-start mt-4 gap-2 text-cyan-400 mx-auto md:mx-0">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2zm0 10c-4.418 0-8-3.582-8-8 0-4.418 3.582-8 8-8s8 3.582 8 8c0 4.418-3.582 8-8 8z" /></svg>
             Jijel, Algeria
           </div>
@@ -121,8 +142,6 @@ export default function Hero() {
             transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
             className="flex flex-col items-center text-slate-400"
           >
-            <span className="text-sm mb-2">Scroll Down</span>
-            <ArrowDown size={20} />
           </motion.div>
         </motion.div>
       </div>

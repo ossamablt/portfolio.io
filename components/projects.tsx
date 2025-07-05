@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback, useMemo, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ExternalLink, Github, Filter } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -9,6 +9,21 @@ import Image from "next/image"
 const projects = [
   {
     id: 1,
+    title: "Fast Food Olirab",
+    description:
+      "End-to-end restaurant management system with real-time order tracking and role-based access. Comprehensive platform for admins, kitchen staff, servers, and cashiers with Firebase integration and WebSocket notifications.",
+    image: "https://media.licdn.com/dms/image/v2/D4E05AQEtWehQF7BXdA/videocover-low/B4EZb.0YhBHMCA-/0/1748033033636?e=1752328800&v=beta&t=k5O6rZW3y6yz-CK5Ct91BV26EIc6FAkwAap4ibZzgkI",
+    videoUrl: "https://media.licdn.com/dms/image/v2/D4E05AQEtWehQF7BXdA/videocover-low/B4EZb.0YhBHMCA-/0/1748033033636?e=1752328800&v=beta&t=k5O6rZW3y6yz-CK5Ct91BV26EIc6FAkwAap4ibZzgkI",
+    technologies: ["Next.js", "React", "Tailwind CSS", "shadcn/ui", "Laravel", "MySQL", "Firebase", "WebSockets"],
+    category: "Full-Stack",
+    liveUrl: "https://olirab-demo.com",
+    githubUrl: "https://github.com/abdelmadjid-belilet/fast-food-olirab",
+    featured: true,
+    period: "January 2024 – Present",
+    location: "Jijel, Algeria",
+  },
+  {
+    id: 2,
     title: "E-Commerce Platform",
     description:
       "Full-stack e-commerce solution with React, Node.js, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.",
@@ -20,7 +35,7 @@ const projects = [
     featured: true,
   },
   {
-    id: 2,
+    id: 3,
     title: "Task Management API",
     description:
       "RESTful API built with Python Django and PostgreSQL. Includes JWT authentication, real-time notifications, and comprehensive documentation.",
@@ -32,7 +47,7 @@ const projects = [
     featured: true,
   },
   {
-    id: 3,
+    id: 4,
     title: "Real-time Chat App",
     description:
       "Modern chat application with React, Socket.io, and MongoDB. Features include group chats, file sharing, and emoji reactions.",
@@ -44,7 +59,7 @@ const projects = [
     featured: false,
   },
   {
-    id: 4,
+    id: 5,
     title: "Data Visualization Dashboard",
     description:
       "Interactive dashboard built with React and D3.js. Displays complex data through beautiful charts and real-time updates.",
@@ -56,7 +71,7 @@ const projects = [
     featured: false,
   },
   {
-    id: 5,
+    id: 6,
     title: "Microservices Architecture",
     description:
       "Scalable microservices system with Docker, Kubernetes, and multiple databases. Includes API gateway and service discovery.",
@@ -68,7 +83,7 @@ const projects = [
     featured: true,
   },
   {
-    id: 6,
+    id: 7,
     title: "Mobile-First Landing Page",
     description:
       "Responsive landing page built with Next.js and Tailwind CSS. Optimized for performance and SEO with perfect Lighthouse scores.",
@@ -86,9 +101,30 @@ const categories = ["All", "Full-Stack", "Frontend", "Backend"]
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
+  const [videoControls, setVideoControls] = useState<{ [key: number]: boolean }>({})
+  const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({})
 
   const filteredProjects =
     selectedCategory === "All" ? projects : projects.filter((project) => project.category === selectedCategory)
+
+  const toggleVideoControls = useCallback((projectId: number) => {
+    setVideoControls(prev => ({
+      ...prev,
+      [projectId]: !prev[projectId]
+    }))
+  }, [])
+
+  const handleVideoClick = useCallback((projectId: number) => {
+    toggleVideoControls(projectId)
+  }, [toggleVideoControls])
+
+  const setVideoRef = useCallback((projectId: number, ref: HTMLVideoElement | null) => {
+    if (ref) {
+      videoRefs.current[projectId] = ref
+    } else {
+      delete videoRefs.current[projectId]
+    }
+  }, [])
 
   return (
     <section id="projects" className="py-20 px-4">
@@ -154,18 +190,115 @@ export default function Projects() {
                 className="group bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-cyan-400/50 transition-all duration-300"
               >
                 <div className="relative overflow-hidden">
-                  <Image
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    width={400}
-                    height={300}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
+                  {project.videoUrl ? (
+                    <video
+                      ref={(ref) => setVideoRef(project.id, ref)}
+                      src={project.videoUrl}
+                      poster={project.image}
+                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110 cursor-pointer"
+                      muted
+                      loop
+                      onMouseEnter={(e) => e.currentTarget.play()}
+                      onMouseLeave={(e) => e.currentTarget.pause()}
+                      onClick={() => handleVideoClick(project.id)}
+                    />
+                  ) : (
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      width={400}
+                      height={300}
+                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                  )}
                   {project.featured && (
                     <div className="absolute top-4 left-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                       Featured
                     </div>
                   )}
+                  {project.videoUrl && (
+                    <>
+                      <div className="absolute top-4 right-4 bg-black/50 text-white px-2 py-1 rounded-full text-xs">
+                        🎥 Video
+                      </div>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="bg-black/60 backdrop-blur-sm rounded-full p-3">
+                          <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                            <div className="w-0 h-0 border-l-[8px] border-l-white border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent ml-1"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  
+                  {/* Video Controls Overlay */}
+                  <AnimatePresence>
+                    {videoControls[project.id] && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center"
+                        onClick={() => toggleVideoControls(project.id)}
+                      >
+                        <div 
+                          className="bg-slate-800/90 backdrop-blur-md rounded-2xl p-6 max-w-sm w-full mx-4 border border-slate-600/50"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div className="text-center mb-6">
+                            <h4 className="text-white font-semibold text-lg mb-2">{project.title}</h4>
+                            <p className="text-slate-400 text-sm">Video Controls</p>
+                          </div>
+                          
+                          <div className="space-y-4">
+                            <Button
+                              onClick={() => {
+                                const video = videoRefs.current[project.id]
+                                if (video) {
+                                  video.paused ? video.play() : video.pause()
+                                }
+                              }}
+                              className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700"
+                            >
+                              ▶️ Play/Pause
+                            </Button>
+                            
+                            <Button
+                              onClick={() => {
+                                const video = videoRefs.current[project.id]
+                                if (video) {
+                                  video.currentTime = 0
+                                  video.play()
+                                }
+                              }}
+                              variant="outline"
+                              className="w-full border-slate-600 text-slate-300 hover:border-cyan-400 hover:text-cyan-400"
+                            >
+                              🔄 Restart
+                            </Button>
+                            
+                            <Button
+                              onClick={() => setSelectedProject(project)}
+                              variant="outline"
+                              className="w-full border-slate-600 text-slate-300 hover:border-cyan-400 hover:text-cyan-400"
+                            >
+                              📺 Full Screen
+                            </Button>
+                            
+                            <Button
+                              onClick={() => toggleVideoControls(project.id)}
+                              variant="ghost"
+                              className="w-full text-slate-400 hover:text-white"
+                            >
+                              ✕ Close
+                            </Button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                     <div className="flex space-x-3">
                       <Button
@@ -190,6 +323,23 @@ export default function Projects() {
                   <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
                     {project.title}
                   </h3>
+                  
+                  {/* Project Period and Location */}
+                  {(project.period || project.location) && (
+                    <div className="flex items-center gap-4 mb-3 text-xs text-slate-500">
+                      {project.period && (
+                        <span className="flex items-center">
+                          📅 {project.period}
+                        </span>
+                      )}
+                      {project.location && (
+                        <span className="flex items-center">
+                          📍 {project.location}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  
                   <p className="text-slate-400 text-sm mb-4 line-clamp-3">{project.description}</p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -235,13 +385,24 @@ export default function Projects() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="relative">
-                  <Image
-                    src={selectedProject.image || "/placeholder.svg"}
-                    alt={selectedProject.title}
-                    width={600}
-                    height={400}
-                    className="w-full h-64 object-cover rounded-t-2xl"
-                  />
+                  {selectedProject.videoUrl ? (
+                    <video
+                      src={selectedProject.videoUrl}
+                      poster={selectedProject.image}
+                      className="w-full h-64 object-cover rounded-t-2xl"
+                      controls
+                      autoPlay
+                      muted
+                    />
+                  ) : (
+                    <Image
+                      src={selectedProject.image || "/placeholder.svg"}
+                      alt={selectedProject.title}
+                      width={600}
+                      height={400}
+                      className="w-full h-64 object-cover rounded-t-2xl"
+                    />
+                  )}
                   <Button
                     size="sm"
                     variant="ghost"
@@ -254,6 +415,23 @@ export default function Projects() {
 
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-white mb-4">{selectedProject.title}</h3>
+                  
+                  {/* Project Period and Location */}
+                  {(selectedProject.period || selectedProject.location) && (
+                    <div className="flex items-center gap-6 mb-4 text-sm text-slate-400">
+                      {selectedProject.period && (
+                        <span className="flex items-center">
+                          📅 {selectedProject.period}
+                        </span>
+                      )}
+                      {selectedProject.location && (
+                        <span className="flex items-center">
+                          📍 {selectedProject.location}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  
                   <p className="text-slate-300 mb-6 leading-relaxed">{selectedProject.description}</p>
 
                   <div className="flex flex-wrap gap-2 mb-6">

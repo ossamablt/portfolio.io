@@ -5,6 +5,9 @@ import About from "@/components/about"
 import Projects from "@/components/projects"
 import Certifications from "@/components/certifications"
 import Services from "@/components/services"
+import SkillsShowcase from "@/components/skills-showcase"
+import Achievements from "@/components/achievements"
+
 import Contact from "@/components/contact"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
@@ -33,7 +36,10 @@ export default function Home() {
       <main>
         <Hero />
         <About />
+        <SkillsShowcase />
         <Projects />
+        <Achievements />
+  
         <Certifications />
         <Services />
         <Contact />

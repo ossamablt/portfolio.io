@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
+import Logo from "./logo"
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -36,26 +37,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center space-x-3">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.15, boxShadow: "0 4px 24px 0 rgba(34,139,230,0.25)" }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden bg-white border border-slate-200"
-              style={{ boxShadow: "0 2px 8px 0 rgba(34,139,230,0.10)" }}
-            >
-              <Image
-                src="/logoo.png"
-                alt="Logo"
-                width={40}
-                height={40}
-                className="object-contain"
-                priority
-              />
-            </motion.div>
-            <span className="text-xl font-bold text-white whitespace-nowrap">MajidDev</span>
-          </motion.div>
+          <Logo size="md" />
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
