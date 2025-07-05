@@ -10,9 +10,12 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import emailjs from 'emailjs-com'
 
-const SERVICE_ID = 'your_service_id'; // TODO: Replace with your EmailJS service ID
-const TEMPLATE_ID = 'your_template_id'; // TODO: Replace with your EmailJS template ID
-const USER_ID = 'your_user_id'; // TODO: Replace with your EmailJS public key
+const SERVICE_ID = 'service_63glw1t';
+const TEMPLATE_ID = 'template_elv0es2';
+const USER_ID = 'dDQhBYmT9p4ioyU9E';
+
+// Initialize EmailJS
+emailjs.init(USER_ID);
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -31,19 +34,25 @@ export default function Contact() {
 
     // Prepare template params for EmailJS
     const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
+      user_name: formData.name,
+      user_email: formData.email,
       subject: formData.subject,
       message: formData.message,
-      to_email: 'majidblt0777@gmail.com', // This is your receiving email
     }
 
     try {
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
+      const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
+      console.log('Email sent successfully:', result)
       setIsSubmitted(true)
       setFormData({ name: '', email: '', subject: '', message: '' })
-    } catch {
-      alert('There was an error sending your message. Please try again later.')
+    } catch (error) {
+      console.error('Email sending failed:', error)
+      // Show more specific error message
+      if (error && typeof error === 'object' && 'text' in error) {
+        alert(`Email error: ${error.text}`)
+      } else {
+        alert('There was an error sending your message. Please try again later.')
+      }
     }
     setIsSubmitting(false)
   }

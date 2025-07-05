@@ -15,26 +15,13 @@ const skills = [
 ]
 
 const experience = [
-  {
-    title: "Senior Full-Stack Developer",
-    company: "Tech Solutions Inc.",
-    period: "2022 - Present",
-    description: "Leading development of enterprise web applications using React, Node.js, and AWS.",
-    achievements: ["Improved app performance by 40%", "Led team of 5 developers", "Implemented CI/CD pipelines"],
-  },
-  {
-    title: "Backend Developer",
-    company: "StartupXYZ",
-    period: "2020 - 2022",
-    description: "Built scalable APIs and microservices using Python and PostgreSQL.",
-    achievements: ["Designed RESTful APIs", "Optimized database queries", "Implemented authentication systems"],
-  },
+  
   {
     title: "Junior Developer",
     company: "WebDev Agency",
     period: "2019 - 2020",
     description: "Developed responsive websites and learned modern web technologies.",
-    achievements: ["Built 20+ websites", "Learned React and Node.js", "Collaborated with design team"],
+    achievements: ["Built 10+ websites", "Learned React and Node.js", "Collaborated with design team"],
   },
 ]
 
@@ -89,7 +76,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center text-slate-300">
                   <Calendar className="w-5 h-5 mr-3 text-cyan-400" />
-                  <span>5+ Years Experience</span>
+                  <span>3+ Years Experience</span>
                 </div>
                 <div className="flex items-center text-slate-300">
                   <Award className="w-5 h-5 mr-3 text-cyan-400" />
@@ -117,7 +104,7 @@ export default function About() {
                   I discovered my love for creating digital solutions.
                 </p>
                 <p>
-                  With over 5 years of experience in full-stack development, I&apos;ve worked with startups and established
+                  With over 3 years of experience in full-stack development, I&apos;ve worked with startups and established
                   companies, helping them bring their ideas to life through clean, efficient code and modern
                   technologies.
                 </p>

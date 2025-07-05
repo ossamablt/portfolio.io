@@ -11,13 +11,7 @@ const achievements = [
     year: "2024",
     color: "#FF9900"
   },
-  {
-    icon: Trophy,
-    title: "Best Developer Award",
-    description: "Recognized for outstanding code quality and innovation",
-    year: "2023",
-    color: "#FFD700"
-  },
+  
   {
     icon: Star,
     title: "3+ Years Experience",
@@ -27,7 +21,7 @@ const achievements = [
   },
   {
     icon: Target,
-    title: "10+ Projects Completed",
+    title: "10+ Projects and mini projects Completed",
     description: "Successfully delivered projects across various industries",
     year: "2024",
     color: "#4ECDC4"
