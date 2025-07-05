@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowDown, Eye, Github, Linkedin, Mail } from "lucide-react"
+import { Eye, Github, Linkedin, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import TypewriterEffect from "@/components/typewriter-effect"
 import CVDownload from "./cv-download"

@@ -27,7 +27,7 @@ export default function Footer() {
             <Logo size="lg" />
             <p className="text-slate-400 leading-relaxed max-w-md">
               Crafting digital experiences with modern technologies and clean code. 
-              Let's build something amazing together.
+              Let&apos;s build something amazing together.
             </p>
           </motion.div>
 

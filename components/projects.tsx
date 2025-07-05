@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useMemo, useRef } from "react"
+import { useState, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ExternalLink, Github, Filter } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -256,7 +256,11 @@ export default function Projects() {
                               onClick={() => {
                                 const video = videoRefs.current[project.id]
                                 if (video) {
-                                  video.paused ? video.play() : video.pause()
+                                  if (video.paused) {
+                                    video.play()
+                                  } else {
+                                    video.pause()
+                                  }
                                 }
                               }}
                               className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700"

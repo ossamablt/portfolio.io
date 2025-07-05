@@ -22,11 +22,7 @@ export default function Logo({ size = "md", showText = true, className = "" }: L
     lg: "text-xl"
   }
 
-  const nameSizes = {
-    sm: "text-xs",
-    md: "text-sm", 
-    lg: "text-lg"
-  }
+
 
   return (
     <motion.div 
